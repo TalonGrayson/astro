@@ -26,7 +26,7 @@ class TagsController < ApplicationController
 
     respond_to do |format|
       if @tag.save
-        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
+        format.html { redirect_to @tag, notice: "#{@tag.name} was successfully created." }
         format.json { render :show, status: :created, location: @tag }
       else
         format.html { render :new }
@@ -40,7 +40,7 @@ class TagsController < ApplicationController
   def update
     respond_to do |format|
       if @tag.update(tag_params)
-        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
+        format.html { redirect_to @tag, notice: "#{@tag.name} was successfully updated." }
         format.json { render :show, status: :ok, location: @tag }
       else
         format.html { render :edit }
@@ -51,9 +51,9 @@ class TagsController < ApplicationController
 
   def soft_delete
     if @tag.update(deleted: true)
-      redirect_back fallback_location: :edit, notice: 'Tag was successfully deleted.'
+      redirect_to tags_path, notice: "#{@tag.name} was successfully deleted."
     else
-      redirect_back fallback_location: :edit, notice: 'Tag could not be deleted!'
+      redirect_back fallback_location: :edit, notice: "#{@tag.name} could not be deleted!"
     end
   end
 

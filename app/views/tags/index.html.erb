@@ -4,11 +4,10 @@
       <th>Name</th>
       <th>Origin</th>
       <th>Type</th>
-      <th>Light rgb</th>
-      <th>Health</th>
-      <th>Defence</th>
-      <th>Attack</th>
-      <th>Speed</th>
+      <th><i class="fas fa-heartbeat"></i></th>
+      <th><i class="fas fa-bomb"></i></th>
+      <th><i class="fas fa-shield-alt"></i></th>
+      <th><i class="fas fa-bolt"></i></th>
       <th>Last seen</th>
       <th colspan="3"></th>
     </tr>
@@ -20,19 +19,18 @@
         <td><%= tag.name %></td>
         <td><%= tag.origin %></td>
         <td><%= tag.variety %></td>
-        <td><%= tag.light_rgb %></td>
         <td><%= tag.health %></td>
-        <td><%= tag.defence %></td>
         <td><%= tag.attack %></td>
+        <td><%= tag.defence %></td>
         <td><%= tag.speed %></td>
-        <td><%= tag.last_seen %></td>
+        <td><%= time_ago_in_words(tag.last_seen) %> ago</td>
         <td>
           <%= link_to tag, class: 'btn btn-sm btn-primary' do %>
             <i class="fas fa-eye"></i>
           <% end %>
         </td>
         <td>
-          <%= link_to edit_tag_path(tag), class: 'btn btn-sm btn-info' do %>
+          <%= link_to edit_tag_path(tag), class: 'btn btn-sm btn-primary' do %>
             <i class="fas fa-edit"></i>
           <% end %>
         </td>
@@ -45,7 +43,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Tag', new_tag_path %>
