@@ -1,0 +1,46 @@
+.tag-card {
+  width: 350px;
+  text-align: center;
+  border: 1px solid silver;
+  border-radius: 4px;
+  background-color: white;
+  margin: 24px;
+  padding: 12px 12px 0 12px;
+}
+
+.tag-card img {
+  max-height: 310px;
+  max-width: 310px;
+  margin: 8px;
+}
+
+.tag-card .tag-name {
+  font-size: 2em;
+  font-weight: bold;
+  padding-bottom: 12px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.tag-button {
+  margin-top: 12px;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.bordered {
+  &.red {
+    border: 1px solid red;
+  }
+  &.blue {
+    border: 1px solid blue;
+  }
+  &.green {
+    border: 1px solid greenyellow;
+  }
+  &.yellow {
+    border: 1px solid yellow;
+  }
+}

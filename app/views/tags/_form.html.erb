@@ -1,0 +1,72 @@
+<%= form_with(model: tag, local: true) do |form| %>
+  <% if tag.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+
+      <ul>
+        <% tag.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :tag_id %>
+    <%= form.text_field :tag_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :origin %>
+    <%= form.text_field :origin %>
+  </div>
+
+  <div class="field">
+    <%= form.label :variety %>
+    <%= form.text_field :variety %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :light_rgb %>
+    <%= form.text_field :light_rgb %>
+  </div>
+
+  <div class="field">
+    <%= form.label :health %>
+    <%= form.number_field :health %>
+  </div>
+
+  <div class="field">
+    <%= form.label :defence %>
+    <%= form.number_field :defence %>
+  </div>
+
+  <div class="field">
+    <%= form.label :attack %>
+    <%= form.number_field :attack %>
+  </div>
+
+  <div class="field">
+    <%= form.label :speed %>
+    <%= form.number_field :speed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_seen %>
+    <%= form.datetime_select :last_seen %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deleted %>
+    <%= form.check_box :deleted %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
