@@ -13,11 +13,29 @@
  *= require_tree .
  *= require_self
  */
+
+// Bootstrap overrides:
+$primary: #8053f3;
+
+// Bootstrap:
 @import '../../../node_modules/bootstrap/scss/bootstrap';
 
+// Application-level CSS:
 body {
-  background-color: #2E2F30;
+  background-color: #1a191c;
   font-family: 'Play', sans-serif;
+}
+
+.notice-bar {
+  position: relative;
+  top: -6px;
+  color: white;
+  text-align: center;
+  padding: 6px 0 6px 0;
+  border-radius: 12px;
+  background-color: #2E2F30;
+  margin-left: 24px;
+  margin-right: 24px;
 }
 
 .global-padding {

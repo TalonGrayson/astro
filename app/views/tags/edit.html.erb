@@ -1,6 +1,92 @@
-<h1>Editing Tag</h1>
+<%= form_with model: @tag do |form| %>
 
-<%= render 'form', tag: @tag %>
+  <div class="d-flex justify-content-center">
 
-<%= link_to 'Show', @tag %> |
-<%= link_to 'Back', tags_path %>
+    <div class="tag-card" style="box-shadow: 0 0 40px 0 rgb(<%= @tag.light_rgb %>);">
+      <% if @tag.tag_image.attached? %>
+        <%= image_tag @tag.tag_image %>
+      <% else %>
+        <div class="d-flex justify-content-center tag-file-upload">
+          <%= form.file_field :tag_image, direct_upload: true %>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <small><%= form.label :name %></small>
+        <%= form.text_field :name, class: 'form-control centered' %>
+      </div>
+
+      <div>
+        <table class="table table-sm table-dark table-striped">
+
+          <thead>
+          <tr>
+            <th>
+              <i class="fas fa-heartbeat"></i>
+            </th>
+            <th>
+              <i class="fas fa-bomb"></i>
+            </th>
+            <th>
+              <i class="fas fa-shield-alt"></i>
+            </th>
+            <th>
+              <i class="fas fa-bolt"></i>
+            </th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr>
+            <td>
+              <%= @tag.health %>
+            </td>
+            <td>
+              <%= @tag.defence %>
+            </td>
+            <td>
+              <%= @tag.attack %>
+            </td>
+            <td>
+              <%= @tag.speed %>
+            </td>
+          </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+      <div>
+          <div class="form-group">
+            <small><%= form.label :origin %></small>
+            <%= form.text_field :origin, class: 'form-control centered' %>
+          </div>
+          <div class="form-group">
+            <small><%= form.label :variety %></small>
+            <%= form.text_field :variety, class: 'form-control centered' %>
+          </div>
+          <div class="form-group">
+            <small><%= form.label :light_rgb, t('light_rgb') %></small>
+            <%= form.color_field :light_rgb, value: Chroma.paint("rgb(#{@tag.light_rgb})").to_hex, class: 'form-control' %>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-5"></div>
+      <div class="col-2">
+        <div class="d-flex justify-content-between">
+          <%= render partial: 'layouts/elements/save_tag_button', locals: {tag: @tag, form: form} %>
+          <%= render partial: 'layouts/elements/tags_index_button', locals: {tag: @tag} %>
+          <%= render partial: 'layouts/elements/view_tag_button', locals: {tag: @tag} %>
+          <%= render partial: 'layouts/elements/delete_tag_button', locals: {tag: @tag} %>
+        </div>
+      </div>
+      <div class="col-5"></div>
+    </div>
+  </div>
+
+
+
+<% end %>

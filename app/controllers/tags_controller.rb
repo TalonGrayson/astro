@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-  before_action :set_tag, only: [:show, :edit, :update, :soft_delete]
+  before_action :set_tag, only: [:show, :edit, :update, :soft_delete, :trigger_tag]
 
   # GET /tags
   # GET /tags.json
@@ -26,7 +26,7 @@ class TagsController < ApplicationController
 
     respond_to do |format|
       if @tag.save
-        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
+        format.html { redirect_to @tag, notice: "#{@tag.name} was successfully created." }
         format.json { render :show, status: :created, location: @tag }
       else
         format.html { render :new }
@@ -40,7 +40,7 @@ class TagsController < ApplicationController
   def update
     respond_to do |format|
       if @tag.update(tag_params)
-        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
+        format.html { redirect_to @tag, notice: "#{@tag.name} was successfully updated." }
         format.json { render :show, status: :ok, location: @tag }
       else
         format.html { render :edit }
@@ -51,9 +51,27 @@ class TagsController < ApplicationController
 
   def soft_delete
     if @tag.update(deleted: true)
-      redirect_back fallback_location: :edit, notice: 'Tag was successfully deleted.'
+      redirect_to tags_path, notice: "#{@tag.name} was successfully deleted."
     else
-      redirect_back fallback_location: :edit, notice: 'Tag could not be deleted!'
+      redirect_back fallback_location: :edit, notice: "#{@tag.name} could not be deleted!"
+    end
+  end
+
+  def trigger_tag
+    data = {
+        device:  'astroscan',
+        origin:  @tag.origin,
+        type:    @tag.variety,
+        name:    @tag.name,
+        light_r: @tag.light_rgb.split(',')[0].to_i,
+        light_g: @tag.light_rgb.split(',')[1].to_i,
+        light_b: @tag.light_rgb.split(',')[2].to_i
+    }
+
+    if ParticleService.new.publish_scan_info(data)
+      redirect_back fallback_location: :show, notice: "#{@tag.name} was triggered!"
+    else
+      redirect_back fallback_location: :show, notice: "#{@tag.name} could not be triggered!"
     end
   end
 

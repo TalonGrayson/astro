@@ -1,22 +1,42 @@
+.info-message {
+  width: 50%;
+  text-align: center;
+  border-radius: 4px;
+  background-color: #343a40;
+  margin: 24px;
+  padding: 12px 12px 0 12px;
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+  padding-bottom: 12px;
+}
+
 .tag-card {
   width: 350px;
   text-align: center;
-  border: 1px solid silver;
   border-radius: 4px;
-  background-color: white;
+  background-color: #343a40;
   margin: 24px;
   padding: 12px 12px 0 12px;
+  color: white;
 }
 
 .tag-card img {
+  border-radius: 12px;
   max-height: 310px;
   max-width: 310px;
   margin: 8px;
+  -webkit-filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.8));
+  filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.8));
 }
 
 .tag-card .tag-name {
   font-size: 2em;
   font-weight: bold;
+  padding-bottom: 12px;
+}
+
+.tag-card form {
   padding-bottom: 12px;
 }
 
@@ -43,4 +63,13 @@
   &.yellow {
     border: 1px solid yellow;
   }
+  &.grey {
+    border: 1px solid #e9e9e9;
+  }
+}
+
+.tag-file-upload {
+  padding: 4px 0 4px 0;
+  border: 1px solid #e9e9e9;
+  border-radius: 4px;
 }
