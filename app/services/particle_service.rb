@@ -10,4 +10,17 @@ class ParticleService
     Particle.devices.map { |device| device.name }
   end
 
+  def get_devices
+    Particle.devices.map { |device| device.name }
+  end
+
+  def publish_scan_info(data)
+
+    Particle.publish(
+        name: 'scan_info',
+        data: data,
+        private: true
+    )
+  end
+
 end

@@ -2,18 +2,16 @@
 
   <div class="tag-card" style="box-shadow: 0 0 40px 0 rgb(<%= @tag.light_rgb %>);">
     <% if @tag.tag_image.attached? %>
-      <%= image_tag @tag.tag_image, class: 'card-img-top' %>
+      <%= image_tag @tag.tag_image %>
     <% else %>
       <i class="fas fa-tag"></i>
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center tag-file-upload">
 
         <%= form_with model: @tag do |form| %>
 
           <%= form.file_field :tag_image, direct_upload: true %>
 
-          <%= button_tag type: 'submit', class: 'btn btn-sm btn-primary' do %>
-            <i class="fas fa-save"></i>
-          <% end %>
+          <%= render partial: 'layouts/elements/save_tag_button', locals: {tag: @tag, form: form} %>
 
         <% end %>
 
@@ -24,7 +22,7 @@
     </div>
 
     <div>
-      <table class="table">
+      <table class="table table-sm table-dark table-striped">
 
         <thead>
         <tr>
@@ -66,11 +64,16 @@
   </div>
 </div>
 
-<div class="d-flex justify-content-center">
-  <%= link_to tags_path, class: 'btn btn-sm btn-primary tag-button' do %>
-    <i class="fas fa-list"></i>
-  <% end %>
-  <%= link_to edit_tag_path(@tag), class: 'btn btn-sm btn-primary tag-button' do %>
-    <i class="fas fa-edit"></i>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-5"></div>
+    <div class="col-2">
+      <div class="d-flex justify-content-around">
+        <%= render partial: 'layouts/elements/tags_index_button', locals: {tag: @tag} %>
+        <%= render partial: 'layouts/elements/edit_tag_button', locals: {tag: @tag} %>
+        <%= render partial: 'layouts/elements/trigger_tag_button', locals: {tag: @tag} %>
+      </div>
+    </div>
+    <div class="col-5"></div>
+  </div>
 </div>
