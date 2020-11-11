@@ -23,7 +23,6 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem "particlerb", "~> 2.1.0"
-gem 'rspec'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -38,7 +37,12 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'database_cleaner'
   gem 'dotenv-rails'
+  gem 'factory_bot_rails', '~> 6.1'
+  gem 'faker', '~> 2.14'
+  gem 'rspec-rails', '~> 4.0'
+  gem 'shoulda-matchers', '~> 4.0'
 end
 
 group :development do
