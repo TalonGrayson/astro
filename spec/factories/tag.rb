@@ -28,5 +28,9 @@ FactoryBot.define do
       speed { Faker::Number.between(from: 11, to: 100)}
     end
 
+    trait :with_image do
+      tag_image { Rack::Test::UploadedFile.new('spec/fixtures/files/hunk.jpg', 'image/jpg') }
+    end
+
   end
 end

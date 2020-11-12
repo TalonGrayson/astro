@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
 
-  <div class="tag-card" style="box-shadow: 0 0 40px 0 rgb(<%= @tag.light_rgb %>);">
+  <div id="tag-card" class="tag-card" style="box-shadow: 0 0 40px 0 rgb(<%= @tag.light_rgb %>);">
     <% if @tag.tag_image.attached? %>
       <%= image_tag @tag.tag_image %>
     <% else %>
