@@ -9,14 +9,7 @@ class TagsController < ApplicationController
 
   # GET /tags/1
   # GET /tags/1.json
-  def show
-    unless @tag.present?
-      respond_to do |format|
-          format.html { redirect_to tags_path, notice: "That tag does not exist" }
-      end
-    end
-
-  end
+  def show; end
 
   # GET /tags/new
   def new
@@ -89,7 +82,9 @@ class TagsController < ApplicationController
     begin
       @tag = Tag.find(params[:id])
     rescue
-      @tag = nil
+      respond_to do |format|
+        format.html { redirect_to tags_path, notice: "That tag does not exist" }
+      end
     end
   end
 

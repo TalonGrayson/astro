@@ -4,9 +4,9 @@ FactoryBot.define do
   factory :tag do
 
     tag_hex { SecureRandom.uuid }
-    origin { Faker::Coffee.origin }
-    variety { Faker::Coffee.variety }
-    name { Faker::Coffee.blend_name }
+    origin { Faker::Coffee.origin.strip }
+    variety { Faker::Coffee.variety.strip }
+    name { Faker::Coffee.blend_name.strip }
     light_rgb do
       "#{Faker::Color.rgb_color[0]},#{Faker::Color.rgb_color[1]},#{Faker::Color.rgb_color[2]}"
     end

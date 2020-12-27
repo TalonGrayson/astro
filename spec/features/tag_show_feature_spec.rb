@@ -4,11 +4,8 @@ require 'rails_helper'
 
 RSpec.feature 'Tag Show view', js: true do
 
-  shared_context 'generic setup' do
-    let!(:tag) { FactoryBot.create(:tag) }
-  end
-
   context 'when the tag does not exist' do
+    let!(:tag) { FactoryBot.create(:tag) }
     scenario 'the user is shown the correct message' do
       given_the_user_is_logged_in
       when_the_user_navigates_to(tag_path(999))
@@ -26,7 +23,7 @@ RSpec.feature 'Tag Show view', js: true do
         when_the_user_navigates_to(tag_path(tag.id))
         then_the_tag_has_the_correct_info(tag)
         then_the_correct_tag_colour_is_shown(tag)
-        then_the_correct_links_are_displayed
+        then_the_correct_links_are_displayed('show')
       end
 
       scenario 'the user can upload an image' do
@@ -57,13 +54,14 @@ RSpec.feature 'Tag Show view', js: true do
         when_the_user_navigates_to(tag_path(tag.id))
         then_the_tag_has_the_correct_info(tag)
         then_the_correct_tag_colour_is_shown(tag)
-        then_the_correct_links_are_displayed
+        then_the_correct_links_are_displayed('show')
       end
 
       scenario 'the image is displayed' do
         given_the_user_is_logged_in
         when_the_user_navigates_to(tag_path(tag.id))
         then_the_image_upload_field_is_not_present
+        then_the_submit_button_is_not_present
         then_the_image_is_displayed
       end
 

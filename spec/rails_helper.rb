@@ -65,6 +65,8 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
+  Capybara.javascript_driver = :selenium_chrome
+
   Capybara.register_driver :selenium do |app|
     Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
@@ -77,16 +79,20 @@ RSpec.configure do |config|
   end
 
   Capybara.register_driver :visible_chrome do |app|
-    options = Selenium::WebDriver::Chrome::Options.new
-    options.add_argument('--no-sandbox')
-    options.add_argument('--start-maximised')
-    Capybara::Selenium::Driver.new(app, browser: :chrome, options: :options)
+    options = Selenium::WebDriver::Chrome::Options.new(
+      args: [' start-maximized ' , ' no-sandbox ' ]
+    )
+    # options.add_argument('--no-sandbox')
+    # options.add_argument('--start-maximised')
+    Capybara::Selenium::Driver.new app,
+                                   browser: :chrome,
+                                   options: options
   end
 
   Capybara.configure do |config|
-    driver = ENV.fetch('DRIVER', 'headless_chrome').to_sym
+    driver                   = ENV.fetch('DRIVER', 'headless_chrome').to_sym
     config.javascript_driver = driver
-    config.default_driver = driver
+    config.default_driver    = driver
   end
 end
 
