@@ -1,0 +1,16 @@
+$twitch-purple: #6441A4;
+
+.login-panel-twitch {
+  width: 500px;
+  text-align: center;
+  border-radius: 4px;
+  background-color: #343a40;
+  margin: 24px;
+  padding: 12px;
+  color: white;
+  box-shadow: 0 0 40px 0 $twitch-purple;
+}
+
+.login-button-twitch {
+  background-color: $twitch-purple !important;
+}

@@ -1,4 +1,7 @@
 class TagsController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :update, :soft_delete, :trigger_tag]
+  protect_from_forgery
+
   before_action :set_tag, only: [:show, :edit, :update, :soft_delete, :trigger_tag]
 
   # GET /tags
@@ -38,13 +41,15 @@ class TagsController < ApplicationController
   # PATCH/PUT /tags/1
   # PATCH/PUT /tags/1.json
   def update
-    respond_to do |format|
-      if @tag.update(tag_params)
-        format.html { redirect_to @tag, notice: "#{@tag.name} was successfully updated." }
-        format.json { render :show, status: :ok, location: @tag }
-      else
-        format.html { render :edit }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
+    if user_signed_in?
+      respond_to do |format|
+        if @tag.update(tag_params)
+          format.html { redirect_to @tag, notice: "#{@tag.name} was successfully updated." }
+          format.json { render :show, status: :ok, location: @tag }
+        else
+          format.html { render :edit }
+          format.json { render json: @tag.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -58,7 +63,8 @@ class TagsController < ApplicationController
   end
 
   def trigger_tag
-    data = {
+    if user_signed_in?
+      data = {
         device:  'astroscan',
         origin:  @tag.origin,
         type:    @tag.variety,
@@ -66,12 +72,15 @@ class TagsController < ApplicationController
         light_r: @tag.light_rgb.split(',')[0].to_i,
         light_g: @tag.light_rgb.split(',')[1].to_i,
         light_b: @tag.light_rgb.split(',')[2].to_i
-    }
+      }
 
-    if ParticleService.new.publish_scan_info(data)
-      redirect_back fallback_location: :show, notice: "#{@tag.name} was triggered!"
+      if ParticleService.new.publish_scan_info(data)
+        redirect_back fallback_location: :show, notice: "#{@tag.name} was triggered!"
+      else
+        redirect_back fallback_location: :show, notice: "#{@tag.name} could not be triggered!"
+      end
     else
-      redirect_back fallback_location: :show, notice: "#{@tag.name} could not be triggered!"
+      redirect_to new_user_session_path, notice: "You are not signed in!"
     end
   end
 

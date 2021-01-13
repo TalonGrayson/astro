@@ -24,6 +24,8 @@ gem 'jbuilder', '~> 2.7'
 
 gem "particlerb", "~> 2.1.0"
 gem 'devise', "~> 4.7"
+gem 'omniauth', '1.9.1'
+gem 'omniauth-twitch'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
