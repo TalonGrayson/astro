@@ -13,7 +13,8 @@
   </head>
 
   <body>
-    <p id="notice" class="notice-bar"><%= notice %></p>
+    <%= render partial: 'layouts/elements/navbar' %>
+    <p id="notice" class="notice notice-bar"><%= notice %></p>
     <div class="global-padding">
       <%= yield %>
     </div>

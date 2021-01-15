@@ -28,14 +28,15 @@ body {
 
 .notice-bar {
   position: relative;
-  top: -6px;
+  //top: -6px;
   color: white;
   text-align: center;
-  padding: 6px 0 6px 0;
-  border-radius: 12px;
-  background-color: #2E2F30;
-  margin-left: 24px;
-  margin-right: 24px;
+  //margin: 6px 0 6px 0;
+  border-radius: 0 0 12px 12px;
+  background-color: #343a40;
+  //margin-left: 24px;
+  //margin-right: 24px;
+  z-index: -10;
 }
 
 .global-padding {

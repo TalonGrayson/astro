@@ -2,7 +2,7 @@
 
   <div class="d-flex justify-content-center">
     <div class="info-message">
-      <%= t('no_tags_found') %>
+      <%= user_signed_in? ? t('no_tags_found') : t('not_signed_in') %>
     </div>
   </div>
 
@@ -19,6 +19,7 @@
       <th><i class="fas fa-shield-alt"></i></th>
       <th><i class="fas fa-bolt"></i></th>
       <th>Last seen</th>
+      <th>Owner</th>
       <th colspan="4">Actions</th>
     </tr>
     </thead>
@@ -35,16 +36,21 @@
         <td><%= tag.speed %></td>
         <td><%= time_ago_in_words(tag.last_seen) %> ago</td>
         <td>
-          <%= render partial: 'layouts/elements/trigger_tag_button', locals: {tag: tag} %>
+          <%= link_to '#' do %>
+            <%= image_tag tag.user.image, style: 'max-width: 35px; max-height: 35px', title: tag.user.name %> <%= tag.user.name %>
+          <% end %>
         </td>
         <td>
-          <%= render partial: 'layouts/elements/view_tag_button', locals: {tag: tag} %>
+          <%= render partial: 'layouts/elements/trigger_tag_button', locals: { tag: tag } %>
         </td>
         <td>
-          <%= render partial: 'layouts/elements/edit_tag_button', locals: {tag: tag} %>
+          <%= render partial: 'layouts/elements/view_tag_button', locals: { tag: tag } %>
         </td>
         <td>
-          <%= render partial: 'layouts/elements/delete_tag_button', locals: {tag: tag} %>
+          <%= render partial: 'layouts/elements/edit_tag_button', locals: { tag: tag } %>
+        </td>
+        <td>
+          <%= render partial: 'layouts/elements/delete_tag_button', locals: { tag: tag } %>
         </td>
       </tr>
     <% end %>
