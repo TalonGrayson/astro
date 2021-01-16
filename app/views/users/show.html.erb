@@ -1,0 +1,25 @@
+<div class="flex-col flex-centered-h">
+
+  <div class="flex-row flex-centered-h">
+    <%= image_tag @user.image %>
+  </div>
+
+  <div class="flex-row flex-centered-h info-panel">
+    <div class="flex-col">
+      <div class="flex-row flex-centered-h">
+        <h2><%= @user.name %></h2>
+      </div>
+
+      <div class="flex-row flex-centered-h">
+        <p><%= @user.description %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div>
+  <!-- Devices not yet implemented -->
+  <%#= render 'users/panels/devices_panel' %>
+</div>
