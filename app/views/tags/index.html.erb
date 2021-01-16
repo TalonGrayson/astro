@@ -36,7 +36,7 @@
         <td><%= tag.speed %></td>
         <td><%= time_ago_in_words(tag.last_seen) %> ago</td>
         <td>
-          <%= link_to '#' do %>
+          <%= link_to user_path(tag.user) do %>
             <%= image_tag tag.user.image, style: 'max-width: 35px; max-height: 35px', title: tag.user.name %> <%= tag.user.name %>
           <% end %>
         </td>

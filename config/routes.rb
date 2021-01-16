@@ -11,5 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, only: [:show]
+
   post 'receive_webhook', to: 'webhooks#receive'
 end
