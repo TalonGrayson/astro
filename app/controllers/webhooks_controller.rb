@@ -20,7 +20,7 @@ class WebhooksController < ApplicationController
 
       @tag = Tag.find_by_tag_hex parsed_params['id']
 
-      @tag.update(last_seen: DateTime.now)
+      @tag.update(last_seen: DateTime.now, deleted: false)
 
       data = {
         device:  parsed_params['device'],
