@@ -76,13 +76,14 @@ class TagsController < ApplicationController
   def trigger_tag
     if user_owns_this_tag?
       data = {
-        device:  'astroscan',
-        origin:  @tag.origin,
-        type:    @tag.variety,
-        name:    @tag.name,
-        light_r: @tag.light_rgb.split(',')[0].to_i,
-        light_g: @tag.light_rgb.split(',')[1].to_i,
-        light_b: @tag.light_rgb.split(',')[2].to_i
+        device:    'astroscan',
+        device_id: @tag.user.devices.first.device_id,
+        origin:    @tag.origin,
+        type:      @tag.variety,
+        name:      @tag.name,
+        light_r:   @tag.light_rgb.split(',')[0].to_i,
+        light_g:   @tag.light_rgb.split(',')[1].to_i,
+        light_b:   @tag.light_rgb.split(',')[2].to_i
       }
 
       if ParticleService.new.publish_scan_info(data)

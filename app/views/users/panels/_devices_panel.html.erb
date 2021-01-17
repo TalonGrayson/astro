@@ -11,22 +11,28 @@
     <div class="flex flex-row flex-centered-h device-panel">
       <div class="flex-col flex-centered-h">
         <div class="flex-row flex-centered-h">
-          <h3><%= device.name %></h3>
+          <h3>
+            <% if device.active %>
+              <i class="fas fa-check-circle text-success" title="This device is active"></i>
+            <% else %>
+              <i class="fas fa-times-circle text-danger" title="This device is not active"></i>
+              <% end %>
+            <%= device.name %>
+          </h3>
         </div>
 
         <div class="flex-row flex-centered-h">
-          <% if device.active %>
-            <i class="fas fa-check-circle text-success"></i> This device is active
-          <% else %>
-            <i class="fas fa-times-circle text-danger"></i> This device is not active
+          <%#= device.device_id %>&nbsp;
+        </div>
+
+        <div class="flex-row flex-centered-h justify-content-between">
+          <%= link_to signal_device_device_path(device), class: 'btn btn-sm btn-success' do %>
+            <i class="fas fa-satellite-dish"></i>
           <% end %>
-        </div>
+          <%= link_to designal_device_device_path(device), class: 'btn btn-sm btn-danger' do %>
+            <i class="fas fa-satellite-dish"></i>
+          <% end %>
 
-        <div class="flex-row flex-centered-h">
-          <%#= device.device_id %>
-        </div>
-
-        <div class="flex-row flex-centered-h">
           <%= link_to '#', class: 'btn btn-sm btn-primary' do %>
             <i class="fas fa-edit"></i>
           <% end %>
