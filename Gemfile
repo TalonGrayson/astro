@@ -22,10 +22,11 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem "particlerb", "~> 2.1.0"
 gem 'devise', "~> 4.7"
+gem 'faker', '~> 2.14'
 gem 'omniauth', '1.9.1'
 gem 'omniauth-twitch'
+gem "particlerb", "~> 2.1.0"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -44,7 +45,6 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'dotenv-rails'
   gem 'factory_bot_rails', '~> 6.1'
-  gem 'faker', '~> 2.14'
   gem 'rspec-rails', '~> 4.0'
   gem 'shoulda-matchers', '~> 4.0'
 end
