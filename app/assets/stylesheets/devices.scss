@@ -14,3 +14,12 @@ $twitch-purple: #6441A4;
 .login-button-twitch {
   background-color: $twitch-purple !important;
 }
+
+.device-panel {
+  text-align: center;
+  border-radius: 4px;
+  background-color: #2c2c2f;
+  margin: 24px;
+  padding: 12px;
+  color: white;
+}

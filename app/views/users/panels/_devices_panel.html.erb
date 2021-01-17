@@ -1,13 +1,45 @@
-<div class="flex flex-centered-h info-panel">
+<div class="flex-col flex-centered-h info-panel">
   <% if @user.devices.count.zero? %>
 
-  You have no devices :(
+    <div class="flex-row flex-centered-h">
+      <h3>You have no devices :(</h3>
+    </div>
 
   <% end %>
-  <ul>
+
   <% @user.devices.each do |device| %>
-    <li><%= device.name %></li>
+    <div class="flex flex-row flex-centered-h device-panel">
+      <div class="flex-col flex-centered-h">
+        <div class="flex-row flex-centered-h">
+          <h3><%= device.name %></h3>
+        </div>
+
+        <div class="flex-row flex-centered-h">
+          <% if device.active %>
+            <i class="fas fa-check-circle text-success"></i> This device is active
+          <% else %>
+            <i class="fas fa-times-circle text-danger"></i> This device is not active
+          <% end %>
+        </div>
+
+        <div class="flex-row flex-centered-h">
+          <%#= device.device_id %>
+        </div>
+
+        <div class="flex-row flex-centered-h">
+          <%= link_to '#', class: 'btn btn-sm btn-primary' do %>
+            <i class="fas fa-edit"></i>
+          <% end %>
+
+          <%= link_to device_path(device), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
   <% end %>
-  </ul>
-  <%= link_to 'Add Device', '#', class: 'btn btn-sm btn-primary' %>
+
+  <div class="flex flex-centered-h">
+    <%= link_to 'Add Device', '#', class: 'btn btn-sm btn-primary' %>
+  </div>
 </div>
