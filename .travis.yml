@@ -1,7 +1,6 @@
 language: ruby
 rvm:
   - 2.6.6
-  - jruby
 cache:
   - bundler
   - yarn
@@ -14,6 +13,9 @@ before_script:
   - yarn
   - bundle exec rake db:create
   - bundle exec rake db:schema:load
+  - bundle exec rake db:migrate
+  - bundle exec rake assets:precompile
 script:
-  - bundle exec rake test
-  - bundle exec rake test:system
+  - bundle exec rake spec
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
