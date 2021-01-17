@@ -13,7 +13,12 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
 
-  resources :devices, only: [:destroy]
+  resources :devices, only: [:destroy] do
+    member do
+      get :signal_device
+      get :designal_device
+    end
+  end
 
   post 'receive_webhook', to: 'webhooks#receive'
 end
