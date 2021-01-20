@@ -10,12 +10,15 @@ class User < ApplicationRecord
   has_many :devices
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.name = auth.info.name
-      user.description = auth.info.description
-      user.image = auth.info.image
-      user.password = Devise.friendly_token[0,20]
-    end
+    user = find_or_create_by(provider: auth.provider, uid: auth.uid)
+
+    user.email = auth.info.email
+    user.name = auth.info.name
+    user.description = auth.info.description
+    user.image = auth.info.image
+    user.password = Devise.friendly_token[0,20]
+    user.save
+
+    user
   end
 end
