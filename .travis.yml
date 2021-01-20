@@ -3,20 +3,16 @@ rvm:
   - 2.6.6
 cache:
   - bundler
-#  - yarn
+  - yarn
 services:
   - postgresql
 before_install:
   - gem update --system
   - bundle update --bundler
 before_script:
-  - bundle install --jobs=3 --retry=3
-#  - yarn
   - bundle exec rake db:create
   - bundle exec rake db:schema:load
   - bundle exec rake db:migrate
-  - bundle exec rake assets:precompile
+#  - bundle exec rake assets:precompile
 script:
   - bundle exec rake spec
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
