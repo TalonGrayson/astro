@@ -1,5 +1,5 @@
 <div class="flex-col flex-centered-h info-panel">
-  <% if @user.devices.count.zero? %>
+  <% if current_user.devices.count.zero? %>
 
     <div class="flex-row flex-centered-h">
       <h3>You have no devices :(</h3>
@@ -7,7 +7,7 @@
 
   <% end %>
 
-  <% @user.devices.each do |device| %>
+  <% current_user.devices.each do |device| %>
     <div class="flex flex-row flex-centered-h device-panel">
       <div class="flex-col flex-centered-h">
         <div class="flex-row flex-centered-h">
