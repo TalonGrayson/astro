@@ -54,7 +54,9 @@ RSpec.describe Tag, type: :model do
 
     context 'with hex as input' do
       let(:input) { Faker::Color.hex_color }
-      let!(:tag) { FactoryBot.build(:tag, light_rgb: input) }
+
+      let(:user) { FactoryBot.create(:user) }
+      let!(:tag) { FactoryBot.build(:tag, light_rgb: input, user: user) }
 
       it 'converts the input to rgb' do
         tag.save
@@ -69,7 +71,10 @@ RSpec.describe Tag, type: :model do
       let(:input) do
         "#{Faker::Color.rgb_color[0]},#{Faker::Color.rgb_color[1]},#{Faker::Color.rgb_color[2]}"
       end
-      let!(:tag) { FactoryBot.build(:tag, light_rgb: input) }
+
+      let(:user) { FactoryBot.create(:user) }
+
+      let!(:tag) { FactoryBot.build(:tag, light_rgb: input, user: user) }
 
       it 'does not mutate the input' do
         tag.save

@@ -17,6 +17,8 @@ FactoryBot.define do
     last_seen { DateTime.now - (Faker::Number.between(from: 5, to: 5_000)) }
     deleted { false }
 
+    user
+
     trait :deleted do
       deleted { true }
     end

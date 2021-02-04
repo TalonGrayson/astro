@@ -1,16 +1,16 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">AstroScan</a>
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">AstroTags</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <%= link_to 'My Tags', tags_path, class: 'nav-link' %>
+      <%= link_to 'My Tags', tags_path, id: 'tags-link', class: 'nav-link' %>
       <% if user_signed_in? %>
-        <%= link_to 'Profile', user_path(current_user), class: 'nav-link' %>
-        <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn login-button-twitch' %>
+        <%= link_to 'Profile', user_path(current_user), id: 'profile-link', class: 'nav-link' %>
+        <%= link_to 'Sign out', destroy_user_session_path, id: 'sign-out-link', method: :delete, class: 'btn login-button-twitch' %>
       <% else %>
-        <%= link_to 'Sign in', user_twitch_omniauth_authorize_path, class: 'btn login-button-twitch' %>
+        <%= link_to 'Sign in', user_twitch_omniauth_authorize_path, id: 'sign-in-link', class: 'btn login-button-twitch' %>
       <% end %>
     </div>
   </div>

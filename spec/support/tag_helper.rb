@@ -3,9 +3,22 @@
 module Astro
   module TagTestHelper
 
+    include Warden::Test::Helpers
+
+    def sign_in(resource_or_scope, resource = nil)
+      resource ||= resource_or_scope
+      scope = Devise::Mapping.find_scope!(resource_or_scope)
+      login_as(resource, scope: scope)
+    end
+
+    def sign_out(resource_or_scope)
+      scope = Devise::Mapping.find_scope!(resource_or_scope)
+      logout(scope)
+    end
+
     # Given
-    def given_the_user_is_logged_in
-      # we don't have users yet
+    def given_the_user_is_logged_in(user)
+      sign_in user
     end
 
     # When
@@ -105,15 +118,17 @@ module Astro
       fill_in 'Origin', with: new_origin
       fill_in 'Variety', with: new_variety
       fill_in 'Light Colour', with: new_hex
-      find('#submit-tag-link').click
+      find('#submit-tag-link').click wait: 20
+      expect(current_path).to eq tag_path(1)
 
       expect(Tag.count).to eq 1
-      expect(page).to have_text "#{new_name} was successfully updated."
       updated_tag = Tag.first
+      updated_tag.reload
       expect(updated_tag.name).to eq new_name
       expect(updated_tag.origin).to eq new_origin
       expect(updated_tag.variety).to eq new_variety
       expect(updated_tag.light_rgb).to eq new_rgb
+      expect(page).to have_text "#{new_name} was successfully updated."
     end
 
     def then_they_can_delete_the_tag(tag)

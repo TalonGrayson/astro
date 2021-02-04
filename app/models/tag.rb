@@ -30,8 +30,6 @@ class Tag < ActiveRecord::Base
         self.speed = roll
       end
     end
-
-    p [max, (self.health + self.defence + self.attack + self.speed)]
   end
 
   def hex_to_rgb
