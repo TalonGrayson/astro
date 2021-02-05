@@ -49,7 +49,7 @@ class TagsController < ApplicationController
     if user_owns_this_tag?
       respond_to do |format|
         if @tag.update(tag_params)
-          format.html { redirect_to @tag, notice: "#{@tag.name} was successfully updated." }
+          format.html { redirect_to tag_path(@tag), notice: "#{@tag.name} was successfully updated." }
           format.json { render :show, status: :ok, location: @tag }
         else
           format.html { render :edit }

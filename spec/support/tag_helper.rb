@@ -118,7 +118,7 @@ module Astro
       fill_in 'Origin', with: new_origin
       fill_in 'Variety', with: new_variety
       fill_in 'Light Colour', with: new_hex
-      find('#submit-tag-link').click wait: 20
+      find('#submit-tag-link').click
       expect(current_path).to eq tag_path(1)
 
       expect(Tag.count).to eq 1

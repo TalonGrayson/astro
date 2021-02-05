@@ -41,8 +41,8 @@ class Tag < ActiveRecord::Base
   private
 
   def init
-    self.deleted = false
-    self.last_seen = DateTime.now
+    self.deleted ||= false
+    self.last_seen ||= DateTime.now
   end
 
   def clean_user_id
