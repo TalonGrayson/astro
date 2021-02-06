@@ -10,7 +10,7 @@ before_install:
   - gem update --system
   - bundle update --bundler
 install:
-  - npm ci
+  - npm install
 before_script:
   - bundle exec rake db:create
   - bundle exec rake db:schema:load
