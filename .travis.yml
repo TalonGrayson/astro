@@ -4,7 +4,6 @@ rvm:
 cache:
   - bundler
   - yarn
-  - npm
 services:
   - postgresql
 before_install:
