@@ -37,7 +37,7 @@
         <td><%= time_ago_in_words(tag.last_seen) %> ago</td>
         <td>
           <%= link_to user_path(tag.user) do %>
-            <%= image_tag tag.user.image, style: 'max-width: 35px; max-height: 35px', title: tag.user.name %> <%= tag.user.name %>
+            <%= image_tag tag.user.image, style: 'max-width: 35px; max-height: 35px', title: tag.user.name if tag.user.image.present? %> <%= tag.user.name %>
           <% end %>
         </td>
         <td>

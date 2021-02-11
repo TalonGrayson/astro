@@ -3,9 +3,23 @@
 module Astro
   module TagTestHelper
 
+    include Warden::Test::Helpers
+    require 'color_converter'
+
+    def sign_in(resource_or_scope, resource = nil)
+      resource ||= resource_or_scope
+      scope = Devise::Mapping.find_scope!(resource_or_scope)
+      login_as(resource, scope: scope)
+    end
+
+    def sign_out(resource_or_scope)
+      scope = Devise::Mapping.find_scope!(resource_or_scope)
+      logout(scope)
+    end
+
     # Given
-    def given_the_user_is_logged_in
-      # we don't have users yet
+    def given_the_user_is_logged_in(user)
+      sign_in user
     end
 
     # When
@@ -40,11 +54,11 @@ module Astro
     end
 
     def then_the_tag_has_the_correct_fields(tag)
-      hex_colour = Chroma.paint("rgb(#{tag.light_rgb})").to_hex
+      hex_colour = ColorConverter.hex(*tag.light_rgb_as_array)
       expect(page).to have_field 'tag[name]', with: tag.name
       expect(page).to have_field 'tag[origin]', with: tag.origin
       expect(page).to have_field 'tag[variety]', with: tag.variety
-      expect(page).to have_field 'tag[light_rgb]', with: hex_colour
+      expect(page).to have_field 'tag[light_rgb]', with: /#{hex_colour}/i
     end
 
     def then_the_correct_tag_colour_is_shown(tag)
@@ -99,21 +113,23 @@ module Astro
       new_name    = Faker::Coffee.blend_name.strip
       new_origin  = Faker::Coffee.origin.strip
       new_variety = Faker::Coffee.variety.strip
-      new_rgb     = "#{Faker::Number.between(from: 0, to: 255)},#{Faker::Number.between(from: 0, to: 255)},#{Faker::Number.between(from: 0, to: 255)}"
-      new_hex     = Chroma.paint("rgb(#{new_rgb})").to_hex
+      new_rgb     = [Faker::Number.between(from: 0, to: 255), Faker::Number.between(from: 0, to: 255), Faker::Number.between(from: 0, to: 255)]
+      new_hex     = ColorConverter.hex(*new_rgb)
       fill_in 'Name', with: new_name
       fill_in 'Origin', with: new_origin
       fill_in 'Variety', with: new_variety
       fill_in 'Light Colour', with: new_hex
       find('#submit-tag-link').click
+      expect(current_path).to eq tag_path(1)
 
       expect(Tag.count).to eq 1
-      expect(page).to have_text "#{new_name} was successfully updated."
       updated_tag = Tag.first
+      updated_tag.reload
       expect(updated_tag.name).to eq new_name
       expect(updated_tag.origin).to eq new_origin
       expect(updated_tag.variety).to eq new_variety
       expect(updated_tag.light_rgb).to eq new_rgb
+      expect(page).to have_text "#{new_name} was successfully updated."
     end
 
     def then_they_can_delete_the_tag(tag)

@@ -35,7 +35,7 @@ gem "particlerb", "~> 2.1.0"
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem "aws-sdk-s3", require: false
-gem 'chroma'
+gem 'color-converter'
 
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 

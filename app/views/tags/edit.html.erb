@@ -56,35 +56,39 @@
       </div>
 
       <div>
-          <div class="form-group">
-            <small><%= form.label :origin %></small>
-            <%= form.text_field :origin, class: 'form-control centered' %>
-          </div>
-          <div class="form-group">
-            <small><%= form.label :variety %></small>
-            <%= form.text_field :variety, class: 'form-control centered' %>
-          </div>
-          <div class="form-group">
-            <small><%= form.label :light_rgb, t('light_rgb') %></small>
-            <%= form.color_field :light_rgb, value: Chroma.paint("rgb(#{@tag.light_rgb})").to_hex, class: 'form-control' %>
-          </div>
+        <div class="form-group">
+          <small><%= form.label :origin %></small>
+          <%= form.text_field :origin, class: 'form-control centered' %>
+        </div>
+        <div class="form-group">
+          <small><%= form.label :variety %></small>
+          <%= form.text_field :variety, class: 'form-control centered' %>
+        </div>
+        <div class="form-group">
+          <small><%= form.label :light_rgb, t('light_rgb') %></small>
+          <%= form.color_field :light_rgb, value: ColorConverter.hex(*@tag.light_rgb_as_array), class: 'form-control' %>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-5"></div>
-      <div class="col-2">
-        <div class="d-flex justify-content-between">
-          <%= render partial: 'layouts/elements/save_tag_button', locals: {tag: @tag, form: form} %>
-          <%= render partial: 'layouts/elements/tags_index_button', locals: {tag: @tag} %>
-          <%= render partial: 'layouts/elements/view_tag_button', locals: {tag: @tag} %>
-          <%= render partial: 'layouts/elements/delete_tag_button', locals: {tag: @tag} %>
+  <div class="flex flex-centered-h">
+
+        <div class="flex-row flex-centered-h">
+          <div class="flex-col btn-padded">
+            <%= render partial: 'layouts/elements/save_tag_button', locals: { tag: @tag, form: form } %>
+          </div>
+          <div class="flex-col btn-padded">
+            <%= render partial: 'layouts/elements/tags_index_button', locals: { tag: @tag } %>
+          </div>
+          <div class="flex-col btn-padded">
+            <%= render partial: 'layouts/elements/view_tag_button', locals: { tag: @tag } %>
+          </div>
+          <div class="flex-col btn-padded">
+            <%= render partial: 'layouts/elements/delete_tag_button', locals: { tag: @tag } %>
+          </div>
         </div>
-      </div>
-      <div class="col-5"></div>
-    </div>
+
   </div>
 
 
