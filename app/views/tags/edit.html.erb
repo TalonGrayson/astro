@@ -66,7 +66,7 @@
         </div>
         <div class="form-group">
           <small><%= form.label :light_rgb, t('light_rgb') %></small>
-          <%= form.color_field :light_rgb, value: Chroma.paint("rgb(#{@tag.light_rgb})").to_hex, class: 'form-control' %>
+          <%= form.color_field :light_rgb, value: ColorConverter.hex(*@tag.light_rgb_as_array), class: 'form-control' %>
         </div>
       </div>
     </div>

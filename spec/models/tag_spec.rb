@@ -50,7 +50,7 @@ RSpec.describe Tag, type: :model do
     end
   end
 
-  context '#hex_to_rgb' do
+  context '#clean_light_rgb' do
 
     context 'with hex as input' do
       let(:input) { Faker::Color.hex_color }
@@ -58,11 +58,14 @@ RSpec.describe Tag, type: :model do
       let(:user) { FactoryBot.create(:user) }
       let!(:tag) { FactoryBot.build(:tag, light_rgb: input, user: user) }
 
+      let(:converted_rgb) { ColorConverter.rgb(input)}
+      let!(:rgb_string) { "#{converted_rgb[0]},#{converted_rgb[1]},#{converted_rgb[2]}" }
+
       it 'converts the input to rgb' do
         tag.save
         tag.reload
 
-        expect(tag.light_rgb).to eq input.paint.to_rgb[4..-2].gsub(' ', '')
+        expect(tag.light_rgb).to eq rgb_string
       end
 
     end

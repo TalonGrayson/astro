@@ -4,6 +4,7 @@ module Astro
   module TagTestHelper
 
     include Warden::Test::Helpers
+    require 'color_converter'
 
     def sign_in(resource_or_scope, resource = nil)
       resource ||= resource_or_scope
@@ -53,11 +54,11 @@ module Astro
     end
 
     def then_the_tag_has_the_correct_fields(tag)
-      hex_colour = Chroma.paint("rgb(#{tag.light_rgb})").to_hex
+      hex_colour = ColorConverter.hex(*tag.light_rgb_as_array)
       expect(page).to have_field 'tag[name]', with: tag.name
       expect(page).to have_field 'tag[origin]', with: tag.origin
       expect(page).to have_field 'tag[variety]', with: tag.variety
-      expect(page).to have_field 'tag[light_rgb]', with: hex_colour
+      expect(page).to have_field 'tag[light_rgb]', with: /#{hex_colour}/i
     end
 
     def then_the_correct_tag_colour_is_shown(tag)
@@ -112,8 +113,8 @@ module Astro
       new_name    = Faker::Coffee.blend_name.strip
       new_origin  = Faker::Coffee.origin.strip
       new_variety = Faker::Coffee.variety.strip
-      new_rgb     = "#{Faker::Number.between(from: 0, to: 255)},#{Faker::Number.between(from: 0, to: 255)},#{Faker::Number.between(from: 0, to: 255)}"
-      new_hex     = Chroma.paint("rgb(#{new_rgb})").to_hex
+      new_rgb     = [Faker::Number.between(from: 0, to: 255), Faker::Number.between(from: 0, to: 255), Faker::Number.between(from: 0, to: 255)]
+      new_hex     = ColorConverter.hex(*new_rgb)
       fill_in 'Name', with: new_name
       fill_in 'Origin', with: new_origin
       fill_in 'Variety', with: new_variety
