@@ -6,8 +6,8 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <% if user_signed_in? %>
-        <%= link_to 'My Tags', tags_path, class: 'nav-link' %>
-        <%= link_to 'My Devices', devices_path, class: 'nav-link' %>
+        <%= link_to 'My Tags', tags_path, id: 'tags-link', class: 'nav-link' %>
+        <%= link_to 'My Devices', devices_path, id: 'devices-link', class: 'nav-link' %>
         <%= link_to 'Profile', user_path(current_user), id: 'profile-link', class: 'nav-link' %>
         <%= link_to 'Sign out', destroy_user_session_path, id: 'sign-out-link', method: :delete, class: 'btn login-button-twitch nav-right' %>
       <% else %>
