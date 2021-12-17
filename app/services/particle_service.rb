@@ -17,7 +17,7 @@ class ParticleService
   def publish_scan_info(data)
 
     Particle.publish(
-        name: 'scan_info',
+        name: 'event_info',
         data: data,
         private: true
     )
