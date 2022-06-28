@@ -1,9 +1,11 @@
 class DevicesController < ApplicationController
 
-  before_action :authenticate_user!, only: [:destroy, :signal_device, :designal_device]
+  before_action :authenticate_user!, only: [:index, :destroy, :signal_device, :designal_device]
   protect_from_forgery
 
   before_action :set_device, only: [:destroy, :signal_device, :designal_device]
+
+  def index; end
 
   def destroy
     if @device.destroy

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
 
-  resources :devices, only: [:destroy] do
+  resources :devices, only: [:index, :destroy] do
     member do
       get :signal_device
       get :designal_device
